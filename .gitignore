@@ -1,2 +1,10 @@
 pyrightconfig.json
 accs.json
+db.json
+.env
+.venv
+.vscode
+.help.txt
+.gitignore
+.ruff_cache
+__pycache__/
