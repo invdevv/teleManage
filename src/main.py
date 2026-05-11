@@ -97,7 +97,8 @@ def list_accounts():
 
 def launch_account(account_id: str) -> bool:
     """
-    Launch Telegram instance for account
+    Launch Telegram instance for account (shell equivalent of:
+    cd ... && ./Telegram &>/dev/null)
     """
 
     account_path = TG_FOLDER_PATH / account_id
@@ -112,17 +113,13 @@ def launch_account(account_id: str) -> bool:
         return False
 
     subprocess.Popen(
-        [
-            str(telegram_bin),
-            "--workdir",
-            str(account_path),
-        ],
+        [str(telegram_bin)],
+        cwd=str(account_path),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
 
     log.info(f"Launched account: {account_id}")
-
     return True
 
 

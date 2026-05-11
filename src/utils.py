@@ -100,7 +100,7 @@ def create_account_folder(account_id: int) -> Path:
         ref_path / "Updater",
         account_path / "Updater",
     )
-
+    
     (account_path / "TelegramForcePortable").mkdir(parents=True, exist_ok=True)
 
     return account_path
