@@ -14,7 +14,13 @@ python3 -m pip install pydantic typer --break-system-packages
 mkdir -p ~/.config/teleManage
 mkdir -p $DATA_FOLDER_PATH/base
 
-git clone --depth=1 https://github.com/invdevv/teleManage $DATA_FOLDER_PATH/script
+if [ -d "$DATA_FOLDER_PATH/script/.git" ]; then
+    cd "$DATA_FOLDER_PATH/script"
+    git pull --rebase
+else
+    git clone --depth=1 https://github.com/invdevv/teleManage "$DATA_FOLDER_PATH/script"
+fi
+
 chmod +x $DATA_FOLDER_PATH/script/src/main.py
 ln -sf $DATA_FOLDER_PATH/script/src/main.py ~/.local/bin/tm
 

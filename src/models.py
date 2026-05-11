@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from datetime import datetime
 
@@ -6,5 +6,6 @@ class Account(BaseModel):
     id: int
     name: str
     
-    created_at: float = datetime.now().timestamp()
-    updated_at: float = datetime.now().timestamp()
+
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)

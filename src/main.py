@@ -5,7 +5,11 @@ import logging
 import subprocess
 
 import typer
+
 from rich.logging import RichHandler
+from rich.table import Table
+from rich.console import Console
+
 
 from config import TG_FOLDER_PATH
 from utils import (
@@ -21,6 +25,8 @@ logging.basicConfig(
 )
 
 log = logging.getLogger("teleManage")
+
+console = Console()
 
 app = typer.Typer(
     help="Tool for managing multiple Telegram Desktop instances"
@@ -85,11 +91,25 @@ def list_accounts():
         accs = get_accs_data()
 
         if not accs:
-            log.info("No accounts found")
+            console.print("[yellow]No accounts found[/yellow]")
             return
 
+        table = Table(title="Telegram Accounts")
+
+        table.add_column("ID", style="cyan")
+        table.add_column("Name", style="green")
+        table.add_column("Created At", style="magenta")
+        table.add_column("Updated At", style="yellow")
+
         for acc in accs:
-            log.info(acc.name)
+            table.add_row(
+                str(acc.id),
+                acc.name,
+                acc.created_at.strftime("%Y-%m-%d %H:%M"),
+                acc.updated_at.strftime("%Y-%m-%d %H:%M"),
+            )
+
+        console.print(table)
 
     except Exception as exc:
         handle_error(exc)
