@@ -19,7 +19,8 @@ chmod +x $DATA_FOLDER_PATH/script/src/main.py
 ln -sf $DATA_FOLDER_PATH/script/src/main.py ~/.local/bin/tm
 
 curl -L https://telegram.org/dl/desktop/linux -o /tmp/telegram.tar.xz
-tar -xvf /tmp/telegram.tar.xz -C $DATA_FOLDER_PATH/ref
+tar -xvf /tmp/telegram.tar.xz -C $DATA_FOLDER_PATH
+mv $DATA_FOLDER_PATH/Telegram $DATA_FOLDER_PATH/ref
 
 echo $DATA_FOLDER_PATH > ~/.config/teleManage/tgf.path
 
