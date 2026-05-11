@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import shutil
+import os
 
 from models import Account
 from config import TG_FOLDER_PATH
@@ -65,7 +66,7 @@ def get_next_account_id(accounts: list[Account]) -> int:
     return max(acc.id for acc in accounts) + 1
 
 
-def create_symlink(source: Path, target: Path) -> None:
+def create_link(source: Path, target: Path) -> None:
     """
     Create symlink if it does not exist
     """
@@ -78,7 +79,7 @@ def create_symlink(source: Path, target: Path) -> None:
             f"Missing reference binary: {source}"
         )
 
-    target.symlink_to(source)
+    os.link(source, target)
 
 
 def create_account_folder(account_id: int) -> Path:
@@ -91,12 +92,12 @@ def create_account_folder(account_id: int) -> Path:
 
     account_path.mkdir(parents=True, exist_ok=True)
 
-    create_symlink(
+    create_link(
         ref_path / "Telegram",
         account_path / "Telegram",
     )
 
-    create_symlink(
+    create_link(
         ref_path / "Updater",
         account_path / "Updater",
     )
