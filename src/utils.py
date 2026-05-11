@@ -87,7 +87,7 @@ def create_account_folder(account_id: int) -> Path:
     """
 
     account_path = TG_FOLDER_PATH / str(account_id)
-    ref_path = TG_FOLDER_PATH / "ref"
+    ref_path = TG_FOLDER_PATH / "Telegram"
 
     account_path.mkdir(parents=True, exist_ok=True)
 
